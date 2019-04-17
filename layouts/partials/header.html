@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
   <link rel="shortcut icon" href="{{ .Site.BaseURL }}images/favicon.ico" />
   <link rel="apple-touch-icon" href="{{ .Site.BaseURL }}images/apple-touch-icon.png" />
-  {{ if eq .Permalink "/" }}
-  <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+  {{ if eq .RelPermalink "/" }}
+  <link href="{{ with .OutputFormats.Get "RSS"  }} {{ .RelPermalink }} {{end}}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
   {{ end }}
 </head>
 <body>
@@ -56,8 +56,8 @@
         &nbsp;Home
       </a>
       {{ end }}
-      {{ with .RelPermalink }}
-      <a href="{{ . }}" class="btn-header btn-subscribe hidden-xs">
+      {{ if .RelPermalink }}
+      <a href="{{ with .OutputFormats.Get "RSS" }}{{ .RelPermalink }} {{end}}  " class="btn-header btn-subscribe hidden-xs">
         <i class="fa fa-rss" aria-hidden="true"></i>
         &nbsp;Subscribe
       </a>
